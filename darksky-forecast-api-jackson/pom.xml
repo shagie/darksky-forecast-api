@@ -33,28 +33,6 @@
 	    <version>${jackson.version}</version>
 	</dependency>
     </dependencies>
-    
-    <build>
-	<plugins>
-	    <plugin>
-		<groupId>org.apache.maven.plugins</groupId>
-		<artifactId>maven-jar-plugin</artifactId>
-		<version>3.0.2</version>
-		<configuration>
-		    <archive>
-			<index>true</index>
-			<manifest>
-			    <addClasspath>true</addClasspath>
-			</manifest>
-			<manifestEntries>
-			    <Automatic-Module-Name>tk.plogitech.darksky.jackson</Automatic-Module-Name>
-			</manifestEntries>
-		    </archive>
-		</configuration>
-	    </plugin>
-	</plugins>
-
-    </build>
 
     <licenses>
 	<license>
