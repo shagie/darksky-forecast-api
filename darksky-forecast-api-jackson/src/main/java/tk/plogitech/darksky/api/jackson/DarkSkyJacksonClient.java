@@ -23,14 +23,15 @@
  */
 package tk.plogitech.darksky.api.jackson;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
+import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
 import static com.fasterxml.jackson.databind.MapperFeature.AUTO_DETECT_GETTERS;
 import static com.fasterxml.jackson.databind.MapperFeature.REQUIRE_SETTERS_FOR_GETTERS;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import static com.fasterxml.jackson.databind.SerializationFeature.INDENT_OUTPUT;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.logging.Level;
+import static java.util.logging.Level.FINE;
 import java.util.logging.Logger;
 import tk.plogitech.darksky.forecast.APIKey;
 import tk.plogitech.darksky.forecast.DarkSkyClient;
@@ -38,10 +39,10 @@ import tk.plogitech.darksky.forecast.ForecastException;
 import tk.plogitech.darksky.forecast.ForecastRequest;
 import tk.plogitech.darksky.forecast.ForecastRequestBuilder;
 import tk.plogitech.darksky.forecast.GeoCoordinates;
+import tk.plogitech.darksky.forecast.model.Forecast;
 import tk.plogitech.darksky.forecast.model.Latitude;
 import tk.plogitech.darksky.forecast.model.Longitude;
-import tk.plogitech.darksky.forecast.model.Forecast;
-import static tk.plogitech.darksky.forecast.util.Assert.notNull;
+import static tk.plogitech.darksky.util.Assert.notNull;
 
 /**
  * Client to fetch weather data from the DarkSky API which uses the Jackson library to parse the JSON response into JavaBean objects.
@@ -63,7 +64,7 @@ public class DarkSkyJacksonClient extends DarkSkyClient {
      */
     public Forecast forecast(ForecastRequest request) throws ForecastException {
 	notNull("The ForecastRequest cannot be null.", request);
-	logger.log(Level.FINE, "Executing Forecat request: {0}", request);
+	logger.log(FINE, "Executing Forecat request: {0}", request);
 
 	try (InputStream is = executeForecastRequest(request)) {
 	    return mapper.readValue(is, Forecast.class);
@@ -75,17 +76,18 @@ public class DarkSkyJacksonClient extends DarkSkyClient {
 
     private static ObjectMapper objectMapper() {
 	ObjectMapper result = new ObjectMapper();
-	result.registerModule(new com.fasterxml.jackson.datatype.jsr310.JavaTimeModule());
+	result.registerModule(new JavaTimeModule());
 	result.configure(REQUIRE_SETTERS_FOR_GETTERS, false);
 	result.configure(AUTO_DETECT_GETTERS, true);
 	result.configure(INDENT_OUTPUT, true);
-	result.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+	result.configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
 	return result;
     }
 
     public static void main(String[] args) throws ForecastException {
 	if (args.length != 3) {
-	    System.out.println("Please provide yout API-Key and a Longitude / Latitrude combination. Usage as follows: '<your-secret-key> <longitude> <latitude>");
+	    System.err.println("Please provide yout API-Key and a Longitude / Latitrude combination. Usage as follows: '<your-secret-key> <longitude> <latitude>");
+	    System.exit(1);
 	}
 	String apikey = args[0];
 	String latitude = args[1];

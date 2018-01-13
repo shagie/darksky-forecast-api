@@ -30,8 +30,8 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static tk.plogitech.darksky.forecast.util.Assert.notNull;
-import tk.plogitech.darksky.forecast.util.IOUtil;
+import static tk.plogitech.darksky.util.Assert.notNull;
+import tk.plogitech.darksky.util.IOUtil;
 
 /**
  * Client to fetch weather data from the DarkSky API.

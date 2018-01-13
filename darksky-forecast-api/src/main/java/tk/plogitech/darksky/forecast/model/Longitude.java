@@ -25,7 +25,7 @@ package tk.plogitech.darksky.forecast.model;
 
 import java.io.Serializable;
 import java.util.Objects;
-import static tk.plogitech.darksky.forecast.util.Assert.notNull;
+import static tk.plogitech.darksky.util.Assert.notNull;
 
 /**
  * Represents the Longitude of a GeoCordinate of a location.

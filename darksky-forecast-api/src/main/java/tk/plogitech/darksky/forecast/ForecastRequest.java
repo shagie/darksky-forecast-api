@@ -25,7 +25,7 @@ package tk.plogitech.darksky.forecast;
 
 import java.net.URL;
 import java.util.Objects;
-import static tk.plogitech.darksky.forecast.util.Assert.notNull;
+import static tk.plogitech.darksky.util.Assert.notNull;
 
 /**
  * Represents a single Request to the DarkSky API.

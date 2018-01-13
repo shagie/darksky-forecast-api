@@ -24,7 +24,7 @@
 package tk.plogitech.darksky.forecast;
 
 import java.util.Objects;
-import static tk.plogitech.darksky.forecast.util.Assert.notNullOrEmpty;
+import static tk.plogitech.darksky.util.Assert.notNullOrEmpty;
 
 /**
  * Represents the authentication Key for DarkSky API.

@@ -26,7 +26,7 @@ package tk.plogitech.darksky.forecast;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Instant;
-import static tk.plogitech.darksky.forecast.util.Assert.notNull;
+import static tk.plogitech.darksky.util.Assert.notNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
