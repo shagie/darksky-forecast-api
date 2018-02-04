@@ -22,6 +22,8 @@
  * THE SOFTWARE.
  */
 module tk.plogitech.darksky.jackson {
+    exports tk.plogitech.darksky.api.jackson;
+    
     requires java.logging;
     requires tk.plogitech.darksky;
     requires com.fasterxml.jackson.annotation;
